@@ -3,6 +3,7 @@
 		<h1>Tarefas</h1>
 		<app-progress class="section-margin"/>
 		<app-bar-add class="section-margin"/>
+		<app-tasks class="section-margin"/>
 	</div>
 </template>
 

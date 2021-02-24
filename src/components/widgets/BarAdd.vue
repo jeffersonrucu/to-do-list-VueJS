@@ -1,16 +1,19 @@
 <template>
     <div id="search">
-        <input type="text" name="" id="" v-model="item" @keyup.enter="add">
+        <input type="text" v-model="item" @keyup.enter="add">
         <button @click="addTask"> + </button>
     </div>
 </template>
 
 <script>
+import Barramento from '@/barramento.js'
+
 export default {
     data(){
         return {
             item: '',
-            task: []
+            task: [],
+            identifier: 0
         }
     },
     methods: {
@@ -18,7 +21,9 @@ export default {
             this.addTask()
         },
         addTask() {
-            this.task.push({titulo: this.item})
+            this.identifier++
+            this.task.push({id: this.identifier, titulo: this.item})
+            Barramento.sendTask( this.task )
             this.item = ''
         }
     },

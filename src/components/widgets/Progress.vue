@@ -9,7 +9,7 @@
 export default {
     data(){
 		return {
-			barProgress: 50,
+			barProgress: 0,
 		}
 	},
     computed: {
