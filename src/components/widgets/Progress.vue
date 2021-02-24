@@ -32,7 +32,7 @@ export default {
 
             } else {
                 // SUA FORMULA SEU LINDÃO SZ
-                this.barProgress = 100 - (DONE/TOTAL) * 100
+                this.barProgress = Math.round(100 - (DONE/TOTAL) * 100)
             }
         })
     },

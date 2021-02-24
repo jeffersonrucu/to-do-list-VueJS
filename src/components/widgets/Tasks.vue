@@ -23,13 +23,29 @@ import Barramento from '@/barramento.js'
 export default {
     data() {
         return {
-            task: []
+            task: [],
+            historyTask: []
+        }
+    },
+    mounted() {
+        if (localStorage.getItem('historyTask')) {
+            try {
+                this.task = JSON.parse(localStorage.getItem('historyTask'));
+            } catch(e) {
+                localStorage.removeItem('historyTask');
+            }
         }
     },
     methods: {
+        saveTask() {
+            const parsed = JSON.stringify(this.historyTask);
+            localStorage.setItem('historyTask', parsed);
+        },
         closeTask(i) {
             this.task.splice(i, 1);
             Barramento.sendTask( this.task )
+            this.historyTask = this.task
+            this.saveTask()
         },
         tasksStutas(i) {
             var status = !this.task[i].statusTask
@@ -41,8 +57,11 @@ export default {
     created() {
         Barramento.attTask(tasks => {
             this.task = tasks
+            this.historyTask = tasks
+            console.log(this.historyTask)
+            this.saveTask()
         })
-    },
+    }
 }
 </script>
 
