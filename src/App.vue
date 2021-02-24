@@ -1,12 +1,13 @@
 <template>
 	<div id="app">
 		<h1>Tarefas</h1>
+		<app-progress />
 	</div>
 </template>
 
 <script>
 export default {
-
+	
 }
 </script>
 
@@ -31,4 +32,5 @@ export default {
 		font-weight: 300;
 		font-size: 3rem;
 	}
+
 </style>
