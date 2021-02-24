@@ -45,5 +45,6 @@ export default {
     .released{
         background-color: #67aa5c;
         height: 30px;
+        border-radius: 7px;
     }
 </style>

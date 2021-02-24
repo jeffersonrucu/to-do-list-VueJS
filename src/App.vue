@@ -1,7 +1,8 @@
 <template>
 	<div id="app">
 		<h1>Tarefas</h1>
-		<app-progress />
+		<app-progress class="section-margin"/>
+		<app-bar-add class="section-margin"/>
 	</div>
 </template>
 
@@ -31,6 +32,10 @@ export default {
 		margin-bottom: 5px;
 		font-weight: 300;
 		font-size: 3rem;
+	}
+
+	.section-margin{
+		margin: 10px 0;
 	}
 
 </style>
