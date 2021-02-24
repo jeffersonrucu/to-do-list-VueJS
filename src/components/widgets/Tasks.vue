@@ -58,7 +58,6 @@ export default {
         Barramento.attTask(tasks => {
             this.task = tasks
             this.historyTask = tasks
-            console.log(this.historyTask)
             this.saveTask()
         })
     }

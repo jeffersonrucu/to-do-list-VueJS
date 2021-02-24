@@ -12,8 +12,23 @@ export default {
     data(){
 		return {
 			barProgress: 100		
-            }
+        }   
 	},
+    watch: {
+        barProgress(){
+            const parsed = JSON.stringify(this.barProgress);
+            localStorage.setItem('historyProgress', parsed);
+        }
+    },
+    mounted() {
+        if (localStorage.getItem('historyProgress')) {
+            try {
+                this.barProgress = JSON.parse(localStorage.getItem('historyProgress'));
+            } catch(e) {
+                localStorage.removeItem('historyProgress');
+            }
+        }
+    },
     computed: {
         checkProgress() {
             if(this.barProgress < 1) {
@@ -29,9 +44,7 @@ export default {
             const DONE = tasks.filter(t => !t.statusTask).length
             if(TOTAL == 0) {
                 this.barProgress = 100
-
             } else {
-                // SUA FORMULA SEU LINDÃO SZ
                 this.barProgress = Math.round(100 - (DONE/TOTAL) * 100)
             }
         })
