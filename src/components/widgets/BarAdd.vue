@@ -13,6 +13,7 @@ export default {
         return {
             item: '',
             task: [],
+            status: false,
             identifier: 0
         }
     },
@@ -22,7 +23,7 @@ export default {
         },
         addTask() {
             this.identifier++
-            this.task.push({id: this.identifier, titulo: this.item})
+            this.task.push({id: this.identifier, titulo: this.item, statusTask: this.status})
             Barramento.sendTask( this.task )
             this.item = ''
         }

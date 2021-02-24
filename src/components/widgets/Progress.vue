@@ -1,25 +1,40 @@
 <template>
     <div id="progress">
         <div :class="{released : checkProgress}" :style="{width: barProgress + '%'}"></div>
-        <p> {{barProgress}} </p>
+        <p> {{barProgress}}% </p>
     </div>
 </template>
 
 <script>
+import Barramento from '@/barramento.js'
+
 export default {
     data(){
 		return {
-			barProgress: 0,
-		}
+			barProgress: 100		
+            }
 	},
     computed: {
         checkProgress() {
             if(this.barProgress < 1) {
                 return false
-            }else {
+            }else {                
                 return true
             }
         }
+    },
+    created() {
+        Barramento.attTask(tasks => {
+            const TOTAL = tasks.length
+            const DONE = tasks.filter(t => !t.statusTask).length
+            if(TOTAL == 0) {
+                this.barProgress = 100
+
+            } else {
+                // SUA FORMULA SEU LINDÃO SZ
+                this.barProgress = 100 - (DONE/TOTAL) * 100
+            }
+        })
     },
     
 }

@@ -1,11 +1,16 @@
 <template>
     <div id="box-cards">
-        <div id="card-task" v-for="(newTask, index) in task" :key="newTask.id">
+
+        <div id="taskOff" v-if="task.length == 0"> 
+            <p>Suas tarefas estão em dia =D</p>
+        </div>
+
+        <div id="card-task" v-for="(newTask, index) in task" :key="newTask.id" v-else>
             <div class="close-task" @click="closeTask(index)">
                 <span> x </span>
             </div>
 
-            <div class="card-body" @click="tasksComplete =!tasksComplete" :class="{'task-complete': tasksComplete}">
+            <div class="card-body" @click="tasksStutas(index)" :class="{'task-complete': newTask.statusTask}">
                 {{newTask.titulo}}
             </div>
         </div> 
@@ -18,14 +23,20 @@ import Barramento from '@/barramento.js'
 export default {
     data() {
         return {
-            tasksComplete: false,
             task: []
         }
     },
     methods: {
         closeTask(i) {
             this.task.splice(i, 1);
-        }       
+            Barramento.sendTask( this.task )
+        },
+        tasksStutas(i) {
+            var status = !this.task[i].statusTask
+            this.task[i].statusTask = status
+            Barramento.sendTask( this.task )
+        },
+        
     },
     created() {
         Barramento.attTask(tasks => {
