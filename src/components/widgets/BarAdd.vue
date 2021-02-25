@@ -17,15 +17,26 @@ export default {
             identifier: 0
         }
     },
+    mounted() {
+        if (localStorage.getItem('historyTask')) {
+            try {
+                this.task = JSON.parse(localStorage.getItem('historyTask'));
+            } catch(e) {
+                localStorage.removeItem('historyTask');
+            }
+        }
+    },
     methods: {
         add() {
             this.addTask()
         },
         addTask() {
-            this.identifier++
-            this.task.push({id: this.identifier, titulo: this.item, statusTask: this.status})
-            Barramento.sendTask( this.task )
-            this.item = ''
+            if(this.item !== '') {
+                this.identifier++
+                this.task.push({id: this.identifier, titulo: this.item, statusTask: this.status})
+                Barramento.sendTask( this.task )
+                this.item = ''
+            }
         }
     },
 }
