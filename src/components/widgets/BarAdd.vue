@@ -1,6 +1,6 @@
 <template>
     <div id="search">
-        <input type="text" v-model="item" @keyup.enter="add">
+        <input placeholder="Crie Sua Tarefa Aqui" type="text" v-model="item" @keyup.enter="add">
         <button @click="addTask"> + </button>
     </div>
 </template>
@@ -57,6 +57,10 @@ export default {
         border-radius: 4px 0 0 4px;
         background-color: #4f5e6c;
         outline: none;
+        color: #FFF;
+    }
+
+    input::placeholder {
         color: #FFF;
     }
 
