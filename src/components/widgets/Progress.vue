@@ -1,6 +1,6 @@
 <template>
     <div id="progress">
-        <div :class="{released : checkProgress}" :style="{width: barProgress + '%'}"></div>
+        <div class="released" :class="{'released-background' : checkProgress}" :style="{width: barProgress + '%'}"></div>
         <p> {{barProgress}}% </p>
     </div>
 </template>
@@ -61,6 +61,7 @@ export default {
         border-radius: 8px;
         text-align: center;
         position: relative;
+        
     }
 
     #progress p {
@@ -71,8 +72,12 @@ export default {
     }
 
     .released{
-        background-color: #67aa5c;
         height: 30px;
         border-radius: 7px;
+        transition: 0.5s ease-in-out
+    }
+
+    .released-background {
+        background-color: #67aa5c;
     }
 </style>
